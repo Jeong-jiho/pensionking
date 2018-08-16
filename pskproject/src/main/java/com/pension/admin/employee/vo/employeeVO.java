@@ -12,7 +12,6 @@ public class employeeVO extends jobVO{
 	private String 	e_hiredate;		//직원입사일
 	private String 	e_retiredate;	//직원퇴사일
 	private int 	e_status;		//직원근무상태
-	private int 	j_no;			//직무번호
 	private String 	e_price;		//직원월급
 	private String 	e_update;		//직원수정일
 	private String 	e_date;			//직원등록일
@@ -73,12 +72,6 @@ public class employeeVO extends jobVO{
 	}
 	public void setE_status(int e_status) {
 		this.e_status = e_status;
-	}
-	public int getJ_no() {
-		return j_no;
-	}
-	public void setJ_no(int j_no) {
-		this.j_no = j_no;
 	}
 	public String getE_price() {
 		return e_price;

@@ -4,7 +4,6 @@ import com.pension.admin.stock.vo.stockVO;
 
 public class orderVO extends stockVO{
 	private int 	o_no;		//발주번호
-	private int 	s_no;		//재고품번호
 	private String 	o_date;		//발주일자
 	private int 	o_ea;		//발주품개수
 	private String 	o_price;	//발주금액
@@ -18,12 +17,6 @@ public class orderVO extends stockVO{
 	}
 	public void setO_no(int o_no) {
 		this.o_no = o_no;
-	}
-	public int getS_no() {
-		return s_no;
-	}
-	public void setS_no(int s_no) {
-		this.s_no = s_no;
 	}
 	public String getO_date() {
 		return o_date;

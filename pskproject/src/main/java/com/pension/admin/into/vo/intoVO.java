@@ -4,7 +4,6 @@ import com.pension.admin.stock.vo.stockVO;
 
 public class intoVO extends stockVO{
 	private int 	in_no;		//입고번호
-	private int 	s_no;		//재고품번호
 	private int 	in_ea;		//입고품개수
 	private String 	in_date;	//입고일자
 	
@@ -16,12 +15,6 @@ public class intoVO extends stockVO{
 	}
 	public void setIn_no(int in_no) {
 		this.in_no = in_no;
-	}
-	public int getS_no() {
-		return s_no;
-	}
-	public void setS_no(int s_no) {
-		this.s_no = s_no;
 	}
 	public int getIn_ea() {
 		return in_ea;
