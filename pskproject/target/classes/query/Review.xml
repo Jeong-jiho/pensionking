@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pension.client.review.dao.ReviewDao">
+
+	<!-- 게시물 기본 조회 -->
+	<select id="reviewList" parameterType="review" resultType="review">
+	/*Review - reviewList */
+	SELECT b_num, b_name, b_title,
+	to_char(b_date, 'YYYY-MM-DD') AS b_date
+	FROM spring_board 
+	<where>
+		<if test="search=='b_title'">
+			<![CDATA[b_title LIKE '%'|| #{keyword} ||'%']]>
+		</if>	
+		<if test="search=='b_content'">
+			<![CDATA[b_content LIKE '%'|| #{keyword} ||'%']]>
+		</if>	
+		<if test="search=='b_name'">
+			<![CDATA[b_name LIKE '%'|| #{keyword} ||'%']]>
+		</if>
+		<if test="search=='b_date'">
+			<![CDATA[to_char(b_date, 'YYYY-MM-DD') between #{start_date} and #{end_date} ]]>
+		</if>	
+	</where>	
+	ORDER BY b_num desc
+	</select>
+	
+</mapper>	
