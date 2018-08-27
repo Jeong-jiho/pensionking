@@ -4,98 +4,72 @@
 	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:aop="http://www.springframework.org/schema/aop"
-	xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
-		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
-		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd">
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.1.xsd">
 
-	<!-- DispatcherServlet Context: defines this servlet's request-processing 
-      infrastructure -->
-
-   <!-- Enables the Spring MVC @Controller programming model -->
-   <annotation-driven />
-
-   <!-- Handles HTTP GET requests for /resources/** by efficiently serving 
-      up static resources in the ${webappRoot}/resources directory -->
-   <resources mapping="/resources/**" location="/resources/" />
-   <resources mapping="/uploadStorage/**" location="/uploadStorage/"></resources>
-   <!-- <resources mapping="/uploadStorage/**" location="/uploadStorage/" /> 
-      <resources mapping="/graph/**" location="/graph/" /> -->
-
-   <!-- ViewResolver -->
-   <!-- Resolves views selected for rendering by @Controllers to .jsp resources 
-      in the /WEB-INF/views directory -->
-   <!-- <beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-
-      이 경로에 jsp파일을 만든다.
-      <beans:property name="prefix" value="/WEB-INF/views/" />
-      <beans:property name="suffix" value=".jsp" />
-   </beans:bean> -->
-   
-   
-   <!-- tiles(타일즈) 설정 - 타일즈를 통해서만 ViewResolver 처리 -->
-   <!-- <beans:bean id="tilesViewResolver" class="org.springframework.web.servlet.view.tiles2.TilesViewResolver" />
-   
-   <beans:bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
-      <beans:property name="definitions">
-         <beans:list>
-            <beans:value>/WEB-INF/tiles-setting.xml/</beans:value>
-         </beans:list>
-      </beans:property>
-   </beans:bean> -->
-   
-   <!-- tiles(타일즈) 설정 - ViewResolver는 타일즈를 통해서, 설정파일에 존재하지 않으면 운선순위2로 name="order" 우선순위설정을 결정한다. -->
-   <beans:bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
-      <beans:property name="definitions">
-         <beans:list>
-            <beans:value>/WEB-INF/tiles/tiles-setting.xml</beans:value>
-            <beans:value>/WEB-INF/tiles/admin-setting.xml</beans:value>
-         </beans:list>
-      </beans:property>
-   </beans:bean>
-
-   <beans:bean id="tilesViewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver" >
-      <beans:property name="viewClass" value="org.springframework.web.servlet.view.tiles2.TilesView" />
-      <beans:property name="order" value="1" />
-   </beans:bean>
-   
-   <beans:bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-      <beans:property name="prefix" value="/WEB-INF/views/" />
-      <beans:property name="suffix" value=".jsp" />
-      <beans:property name="order" value="2" />
-   </beans:bean>
-   
-   <!-- 첨부파일을 위한 설정 -->
-   <beans:bean   class="org.springframework.web.multipart.commons.CommonsMultipartResolver"   id="multipartResolver">
-   <beans:property name="defaultEncoding" value="UTF-8"></beans:property>
-   <beans:property name="maxUploadSize" value="5242880"></beans:property>
-   </beans:bean>
-
-
-   <!-- base-package의 대상을 모든것으로 잡는다. 여기에 있는 것들 전부 어노테이션이 있다면 객체생성을 하겠다. -->
-   <context:component-scan
-      base-package="com.pension.**.**.**" />
-
-   
-   <!-- 자동으로 AspectJ 라이브러리를 이용해서 Proxy 객체를 생성해 내는 용도로 사용. 어노테이션 사용시 반드시 필요-->
-   <aop:aspectj-autoproxy />
-   
-   <!-- aspect는 핵심 관점에 해당하는 포인트컷 메소드와 횡돤 관심에 해당하는 어드바이스 메소드를 결합하기 위해 사용 -->   
-   <!-- <beans:bean id="log" class="com.spring.common.log.LoggerAdvice" />
-   <aop:config>
-      Impl로 끝나는 구현클래스, 메서드(..), 모든 매개변수(..) logging 체크 
-      * 리턴타입, com.spring.. 패키지 경로, *Impl 클래스명, *(..) & *List(..) 메소드명 및 매개변수
-      <aop:pointcut expression="execution(* com.spring..*Impl.*(..))" id="allPointcut"/>
-      <aop:pointcut expression="execution(* com.spring..*Impl.*List(..))" id="listPointcut"/>
-      <aop:aspect ref="log">
-         위에있는 모든 메서드가 처리될때마다 printLogging 처리
-         <aop:before method="printLogging" pointcut-ref="allPointcut"/>
-         <aop:around method="timeLogging" pointcut-ref="allPointcut"/>
-      </aop:aspect>
-   </aop:config> -->
+	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
 	
+	<!-- Enables the Spring MVC @Controller programming model -->
+	<annotation-driven />
+
+	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
+	<resources mapping="/resources/**" location="/resources/" />
+	<resources mapping="/uploadStorage/**" location="/uploadStorage/" />
+	<resources mapping="/graph/**" location="/graph/" />
+ 
+	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory
+	 <beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<beans:property name="prefix" value="/WEB-INF/views/" />
+		<beans:property name="suffix" value=".jsp" /> 
+	</beans:bean> -->
+	 
+		
+	<!-- 타일즈(tiles) 설정 - 타일즈를 통해서만 ViewResolver 처리 -->
+	<!--<beans:bean id="tilesViewResolver" class="org.springframework.web.servlet.view.tiles2.TilesViewResolver" /> --> 
 	
+	<beans:bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
+		<beans:property name="definitions">
+			<beans:list>
+				<beans:value>/WEB-INF/tiles/tiles-setting.xml</beans:value>
+				<beans:value>/WEB-INF/tiles/admin-setting.xml</beans:value>
+			</beans:list> 
+		</beans:property>
+	</beans:bean>
 	
+	 <beans:bean id="tilesViewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+		<beans:property name="viewClass" value="org.springframework.web.servlet.view.tiles2.TilesView" />
+		<beans:property name="order" value="1" />
+	</beans:bean>
+	
+	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<beans:property name="prefix" value="/WEB-INF/views/" />
+		<beans:property name="suffix" value=".jsp" />
+		<beans:property name="order" value="2" />
+	</beans:bean>
+	
+	<context:component-scan base-package="com.pension.**.**.**" />
+	
+	<beans:bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<beans:property name="defaultEncoding" value="UTF-8"></beans:property>
+		<beans:property name="maxUploadSize" value="5242880"></beans:property>
+	</beans:bean>
+	
+	<!-- 자동으로 AspectJ 라이브러리를 이용해서 Proxy 객체를 생성해 내는 용도로 사용 -->
+	<aop:aspectj-autoproxy /> 
+	
+	<!-- aspect는 핵심 관점에 해당하는 포인트컷 메소드와 횡단 관심에 해당하는 어드바이스 메소드를 결합하기 위해 사용 -->
+	<!-- <beans:bean id="log" class="com.spring.common.log.LoggerAdvice" />
+	<aop:config>
+		<aop:pointcut expression="execution(* com.spring..*Impl.*(..))" id="allPointcut"/>
+		<aop:pointcut expression="execution(* com.spring..*Impl.*List(..))" id="listPointcut"/>
+		<aop:aspect ref="log">
+			<aop:before method="printLogging" pointcut-ref="listPointcut" />
+			<aop:around method="timeLogging" pointcut-ref="allPointcut" />
+		</aop:aspect>
+	</aop:config> -->
+
+
 </beans:beans>

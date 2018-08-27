@@ -15,6 +15,18 @@
 		<level value="info" />
 	</logger>
 	
+	<logger name="com.pension.admin">
+		<level value="info" />
+	</logger>
+	
+	<logger name="com.pension.admin.room.dao">
+		<level value="trace" />
+	</logger>
+	
+	<logger name="com.pension.client.reservation.dao">
+		<level value="trace"/>
+	</logger>
+	
 	<!-- 3rdparty Loggers -->
 	<logger name="org.springframework.core">
 		<level value="info" />
