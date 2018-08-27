@@ -15,7 +15,7 @@
    #boardList th{border-right:1px solid #000066; background-color:#e7e7e7;}
 
    #boardList .borcle{border-right:0px; }   
-   #boardList .rCount{font-size:10px; color:red;}
+   #List.rp_cnt{font-size:10px; color:red;}
    
    /* 페이징 출력 div 부분 */
    #boardContainer #boardPage{width:96%; margin-top:10px;}

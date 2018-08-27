@@ -7,10 +7,15 @@
 	<definition name="intro" template="/WEB-INF/views/template/client/mainLayout.jsp">
 		<put-attribute name="title" value="펜션왕" />
 		<put-attribute name="header" value="/WEB-INF/views/template/client/header.jsp" />
+<<<<<<< HEAD
 		<put-attribute name="footer" value="/WEB-INF/views/template/client/footer.jsp"/>
+=======
+		<put-attribute name="footer" value="/WEB-INF/views/template/client/footer.jsp" />
+>>>>>>> branch 'master' of https://github.com/Jeong-jiho/pensionking.git
 	</definition>
 	 
-	<!--<definition name="content"
+	 	
+   <definition name="content"
 	template="/WEB-INF/views/template/client/contentLayout.jsp">
 		<put-attribute name="title" value="펜션왕" />
 		<put-attribute name="header" value="/WEB-INF/views/template/client/header.jsp"/>
@@ -18,22 +23,22 @@
 		<put-attribute name="footer" value="/WEB-INF/views/template/client/footer.jsp"/>
 	</definition>
 	
-			
-	<definition name="board/*" extends="content">
-		<put-attribute name="title" value="기본게시판" />
-		<put-attribute name="body" value="/WEB-INF/views/board/{1}.jsp"/>
-	</definition>
-	
+	<definition name="review/*" extends="content">
+		<put-attribute name="title" value="후기게시판" />
+		<put-attribute name="body" value="/WEB-INF/views/review/{1}.jsp"/>
+	</definition> 
+	 
+	<!-- 
 	<definition name="replies/*" extends="content">
 		<put-attribute name="body" value="/WEB-INF/views/board/reply.jsp"/>
-	</definition>
-	
+	</definition> -->
+	<!-- 
 	<definition name="gallery/*" extends="content">
 		<put-attribute name="title" value="갤러리 게시판"/>
 		<put-attribute name="body" value="/WEB-INF/views/member/{1}.jsp"/>
-	</definition>
+	</definition> -->
 	
-	<definition name="gallery/*" extends="content">
+	<!-- <definition name="gallery/*" extends="content">
 		<put-attribute name="title" value="회원가입"/>
 		<put-attribute name="body"
 		value="/WEB-INF/views/gallery/{1}.jsp"/>

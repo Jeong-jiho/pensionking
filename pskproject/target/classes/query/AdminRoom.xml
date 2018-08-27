@@ -5,4 +5,4 @@
 	<select id="roomList" parameterType="room" resultType="room">
 		SELECT r_no,r_name,r_size,r_standard,r_max,r_cvc,r_kind from room
 	</select>
-</mapper> 
+</mapper>  

@@ -14,4 +14,10 @@
 		<put-attribute name ="main" value="/WEB-INF/views/admin/room/{1}.jsp" />
 	</definition>
 	
+	<definition name="admin/notice/*" extends="basic">
+		<put-attribute name="title" value="공지사항 관리"></put-attribute>
+		<put-attribute name="left" value="/WEB-INF/views/template/admin/left.jsp" />
+		<put-attribute name ="main" value="/WEB-INF/views/admin/notice/{1}.jsp" />
+	</definition>
+	 
 </tiles-definitions>

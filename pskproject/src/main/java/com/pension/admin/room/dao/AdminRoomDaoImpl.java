@@ -18,4 +18,4 @@ public class AdminRoomDaoImpl implements AdminRoomDao {
 		return session.selectList("roomList",rvo);
 	}
 }
- 
+  

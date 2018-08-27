@@ -20,3 +20,4 @@ public class AdminRoomServiceImpl implements AdminRoomService {
 		return myList; 
 	}
 }
+ 

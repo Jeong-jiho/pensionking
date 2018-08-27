@@ -26,7 +26,7 @@ public class AdminRoomController {
 	private AdminRoomService adminRoomService;
 	/**
 	 * Simply selects the home view to render by returning its name.
-	 */
+	 */ 
 	@RequestMapping(value = "/room/roomList.do", method = RequestMethod.GET)
 	public String roomList(@ModelAttribute("roomData") RoomVO rvo, Model model) {
 		logger.info("Welcome home! The client locale is {}.");

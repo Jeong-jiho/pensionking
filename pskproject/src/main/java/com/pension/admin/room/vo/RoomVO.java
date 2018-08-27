@@ -10,7 +10,7 @@ public class RoomVO {
 	private String r_date = "";
 	private String r_update = "";
 	private String r_kind = "";
-	
+	 
 	public int getR_no() {
 		return r_no;
 	}
