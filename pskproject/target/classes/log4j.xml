@@ -9,16 +9,37 @@
 			<param name="ConversionPattern" value="%-5p: %c - %m%n" />
 		</layout>
 	</appender>
-	
+	 
 	<!-- Application Loggers -->
 	<logger name="com.pension.client">
 		<level value="info" />
 	</logger>
+	 	
+	<logger name="com.pension.admin">
+		<level value="info" />
+	</logger>
+	
+	<logger name="com.pension.common">
+		<level value="info" />
+	</logger>
+	 	
 	
 	<logger name="com.pension.client.review.dao">
 		<level value="trace" />
 	</logger>
+	 
+	<logger name="com.pension.client.reply.dao">
+		<level value="trace" />
+	</logger>
+		
+	<logger name="com.pension.admin.room.dao">
+		<level value="trace" />
+	</logger>
 	
+	<logger name="com.pension.admin.notice.dao">
+		<level value="trace" />
+	</logger>
+	 
 	<!-- 3rdparty Loggers -->
 	<logger name="org.springframework.core">
 		<level value="info" />
@@ -42,4 +63,5 @@
 		<appender-ref ref="console" />
 	</root>
 	
+
 </log4j:configuration>

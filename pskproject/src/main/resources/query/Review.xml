@@ -2,27 +2,72 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.pension.client.review.dao.ReviewDao">
 
-	<!-- 게시물 기본 조회 -->
 	<select id="reviewList" parameterType="review" resultType="review">
-	/*Review - reviewList */
-	SELECT b_num, b_name, b_title,
-	to_char(b_date, 'YYYY-MM-DD') AS b_date
-	FROM spring_board 
+	SELECT a.rv_no, rv_title, rv_name, readcnt, 
+	to_char(rv_date, 'YYYY-MM-DD') AS rv_date, 
+	(select count(*) from reply where rv_no=a.rv_no) as rp_cnt 
+	FROM review a 
 	<where>
-		<if test="search=='b_title'">
-			<![CDATA[b_title LIKE '%'|| #{keyword} ||'%']]>
+		<if test="search=='rv_title'">
+			<![CDATA[rv_title LIKE '%'|| #{keyword} ||'%']]>
 		</if>	
-		<if test="search=='b_content'">
-			<![CDATA[b_content LIKE '%'|| #{keyword} ||'%']]>
+		<if test="search=='rv_content'">
+			<![CDATA[rv_content LIKE '%'|| #{keyword} ||'%']]>
 		</if>	
-		<if test="search=='b_name'">
-			<![CDATA[b_name LIKE '%'|| #{keyword} ||'%']]>
+		<if test="search=='rv_name'">
+			<![CDATA[rv_name LIKE '%'|| #{keyword} ||'%']]>
 		</if>
-		<if test="search=='b_date'">
-			<![CDATA[to_char(b_date, 'YYYY-MM-DD') between #{start_date} and #{end_date} ]]>
-		</if>	
-	</where>	
-	ORDER BY b_num desc
+		<if test="search=='rv_date'">
+			<![CDATA[to_char(rv_date, 'YYYY-MM-DD') between #{start_date} and #{end_date} ]]>
+		</if>
+	</where>
+	order by a.rv_no desc	
+	</select>	
+	
+	<!-- 게시물 입력 -->
+	<insert id="reviewInsert" parameterType="review" >
+	INSERT INTO review(rv_no ,rv_name ,rv_title ,rv_content 
+	<if test="rv_file != null and rv_file !=''">,rv_file</if> ,rv_pwd)
+	VALUES(review_seq.nextval ,#{rv_name} ,#{rv_title} ,#{rv_content} 
+	<if test="rv_file != null and rv_file !=''">,#{rv_file}</if> ,#{rv_pwd})
+	</insert>
+	
+	<!-- 게시물 상세 조회 -->
+	<select id="reviewDetail" parameterType="review" resultType="review">
+	/*Review - reviewDetial */
+	SELECT rv_no, rv_name, rv_title, rv_content,
+	to_char(rv_date, 'YYYY-MM-DD HH24:MI:SS') AS rv_date, 
+	to_char(rv_update, 'YYYY-MM-DD HH24:MI:SS') AS rv_update, 
+	rv_file	FROM review WHERE rv_no = #{rv_no}		
 	</select>
+	
+	<!-- 해당 번호의 비밀번호 확인  -->
+	<select id="pwdConfirm" parameterType="review" resultType="int">
+	/*Review - pwdConfirm */
+	SELECT NVL((SELECT 1 FROM review 
+	WHERE rv_no=#{rv_no} AND rv_pwd=#{rv_pwd}),0) as state FROM dual
+	</select>
+	
+	<!-- 게시물 수정하기  -->
+	<update id="reviewUpdate" parameterType="review">
+	/*Review - updateForm */
+	UPDATE review SET rv_title=#{rv_title}, rv_content=#{rv_content}, rv_update=sysdate
+	<if test="rv_pwd != ''">,rv_pwd=#{rv_pwd}</if> 
+	<if test="rv_file != ''">,rv_file=#{rv_file}</if> WHERE rv_no=#{rv_no}
+	</update>
+	
+	
+	<!-- 게시물 삭제하기  -->
+	<delete id="reviewDelete" parameterType="review">
+	/*Review - deleteForm */
+	DELETE FROM review WHERE rv_no=#{rv_no}
+	</delete>
+	
+	<!-- 조회수 넣기  -->
+	<update id="updateCnt" parameterType="review">
+    UPDATE review SET readcnt = NVL(readcnt,0) + 1
+    WHERE rv_no = #{rv_no}
+	</update>
+	
 	
 </mapper>	

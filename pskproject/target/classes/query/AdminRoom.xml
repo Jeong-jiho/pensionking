@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pension.admin.room.dao.AdminRoomDao">
+	<!-- 게시물 상세보기 -->
+	<select id="roomList" parameterType="room" resultType="room">
+		SELECT r_no,r_name,r_size,r_standard,r_max,r_cvc,r_kind from room
+	</select>
+</mapper>  

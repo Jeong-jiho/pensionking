@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pension.client.reply.dao.ReplyDao" >
+
+	<!-- 게시물 기본 조회 -->
+	<select id="replyList" parameterType="reply" resultType="reply">
+	select rp_no, rv_no, rp_writer, rp_content, rp_pwd, 
+	to_char(rp_date, 'YYYY-MM-DD HH24:MI:SS') as rp_date
+	from reply 
+	where rv_no = #{rv_no}
+	order by rp_no desc
+	</select>	
+	
+	
+	<!-- 댓글 등록 -->
+	<insert id="replyInsert" parameterType="reply">
+	<selectKey keyProperty="rp_no" resultType="int" order="BEFORE">
+         select reply_seq.nextval from dual
+    </selectKey>
+	INSERT INTO reply(rp_no, rv_no, rp_writer, rp_content, rp_pwd)  
+	VALUES(#{rp_no}, #{rv_no}, #{rp_writer}, #{rp_content}, #{rp_pwd}) 
+	</insert>
+
+
+	<select id="pwdConfirm" parameterType="reply" resultType="int">
+	SELECT NVL((
+				SELECT 1 FROM reply
+				WHERE rp_no = #{rp_no} AND rp_pwd=#{rp_pwd}),0)
+				 as state FROM dual
+	
+	</select>
+	
+	<!-- 댓글 삭제 -->
+	<delete id="replyDelete" parameterType="int">
+	DELETE FROM reply WHERE rp_no=#{rp_no}
+	</delete>
+	
+	<!-- 댓글 수정  -->
+	<update id="replyUpdate" parameterType="reply">
+	UPDATE reply SET rp_content=#{rp_content},
+	rp_date = sysdate 
+	where rp_no=#{rp_no}	
+	</update>
+	
+	<!-- 댓글 갯수 구하기 -->
+	<select id="replyCount" parameterType="int" resultType="int">
+	SELECT count(rp_no) from reply where rv_no = #{rv_no}
+	</select>
+	
+</mapper>
