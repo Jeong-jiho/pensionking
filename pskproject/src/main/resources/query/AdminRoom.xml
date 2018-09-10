@@ -1,8 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.pension.admin.room.dao.AdminRoomDao">
-	<!-- 게시물 상세보기 -->
+	<!-- 객실 보기 -->
 	<select id="roomList" parameterType="room" resultType="room">
-		SELECT r_no,r_name,r_size,r_standard,r_max,r_cvc,r_kind from room
+		SELECT r_no,r_size,r_name,pr_weekday,pr_weekend,pr_sweekday,pr_sweekend,r_size,r_standard,r_max,r_cvc,r_kind,r_main from room 
+		inner join price using(r_no)order by r_name
 	</select>
-</mapper>  
+	
+	<!-- 방이름 가져오기 -->
+	<select id="roomName" resultType="room" parameterType="room">
+		select r_no, r_name,pr_weekday,pr_weekend,pr_sweekday,pr_sweekend from room inner join price using(r_no)
+		 order by r_name
+	</select>
+	
+	<!-- 객실 상세보기 -->
+	<select id="roomDetail" parameterType="room" resultType="room">
+		SELECT r_no,r_name,r_size,r_standard,r_max,r_cvc,r_kind,r_info,r_main,
+		to_char(r_date,'YYYY-MM-DD')as r_date from room where r_no=#{r_no}
+		
+	</select> 
+	
+	<!-- 객실 등록 --> 
+	<insert id="roomInsert" parameterType="room">
+		insert into room(r_no, r_name, r_size, r_standard, r_max, r_cvc, r_date, r_kind, r_info, r_main)
+		values(room_seq.nextval,#{r_name},#{r_size},#{r_standard},#{r_max},#{r_cvc},sysdate,
+		#{r_kind},#{r_info}, #{r_main})
+	</insert>
+	
+	<!-- 다음 시퀀스 가져오기 -->
+	<select id="getRoomSeq" resultType="int">
+		select max(r_no) from room 
+	</select>
+	
+	<!-- 메인이미지 파일이름 가져오기 -->
+	<select id="getMain" resultType="String" parameterType="int">
+		select r_main from room where r_no=#{r_no}
+	</select> 
+	
+	<!-- 메인 이미지파일이름 업데이트 -->
+	<update id="roomR_mainUpdate" parameterType="room">
+		update room set r_main = #{r_main} where r_no = #{r_no}
+	</update>
+	
+	<!-- 객실 수정 -->
+	<update id="roomUpdate" parameterType="room">
+		update room set r_name = #{r_name}, r_size = #{r_size}, r_standard = #{r_standard}, 
+		r_max = #{r_max}, r_cvc = #{r_cvc}, r_update = sysdate, r_kind = #{r_kind}, r_info = #{r_info}
+		where r_no = #{r_no}
+	</update>
+	
+	<!-- 객실 삭제 -->
+	<delete id="roomDelete" parameterType="room">
+		delete from room where r_no=#{r_no}
+	</delete> 
+	
+</mapper> 
+
+

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pension.client.member.dao.MemberDao">
+	<select id="securitySelect" parameterType="String" resultType="security">
+		SELECT userid, salt FROM security WHERE userid = #{userId}
+	</select>
+	
+	<insert id="securityInsert" parameterType="security">
+		INSERT INTO security(userid, salt) VALUES(#{userId}, #{salt})
+	</insert> 
+	
+	<delete id="securityDelete" parameterType="String">
+		DELETE FROM security WHERE userid = #{userId}
+	</delete>
+
+	<insert id="memberInsert" parameterType="member">
+		/* member - memberInsert */
+		<selectKey keyProperty="m_no" resultType="int" order="BEFORE">
+			SELECT member_seq.nextval FROM DUAL 
+		</selectKey>
+		INSERT INTO member(m_no, m_name, m_phone, m_gender, m_email, m_id, m_pwd, m_date)
+		VALUES(#{m_no}, #{m_name}, #{m_phone}, #{m_gender}, #{m_email}, #{m_id}, #{m_pwd}, SYSDATE)
+	</insert>
+	
+	<select id="memberSelect" parameterType="String" resultType="member">
+		SELECT m_no, m_id, m_pwd, m_name, m_email, m_phone,m_gender,to_char(m_date,'yyyy-mm-dd') m_date1, m_update, m_retiredate, m_status FROM member WHERE m_id = #{m_id}
+	</select>
+	
+	<update id="memberUpdate" parameterType="member">
+		/* member - memberUpdate */
+		UPDATE member SET
+			<if test="m_pwd != null and m_pwd != ''">
+				m_pwd = #{m_pwd},
+			</if>
+			m_phone = #{m_phone},
+			m_email = #{m_email},
+			m_update = SYSDATE
+		WHERE m_id = #{m_id}
+	</update>
+	
+	<update id="memberDelete" parameterType="member">
+		/* member - memberDelete */
+		UPDATE member SET 
+			<if test="m_pwd != null and m_pwd != ''">
+				m_pwd = #{m_pwd},
+			</if>
+			m_phone = 0,
+			m_email = 0,
+			m_gender = 0,
+			m_name = 0,
+			m_retiredate = SYSDATE,
+			m_status = 0
+		WHERE m_id = #{m_id}
+	</update>
+	
+	<select id="findIdSelect" parameterType="member" resultType="String">
+	      SELECT m_id FROM member WHERE m_name = #{m_name} AND m_phone = #{m_phone}
+	   </select>
+</mapper>

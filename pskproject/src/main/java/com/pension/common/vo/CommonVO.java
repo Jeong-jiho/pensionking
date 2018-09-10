@@ -1,12 +1,6 @@
 package com.pension.common.vo;
 
 public class CommonVO {
-<<<<<<< HEAD
-	
-}
-=======
-
-	//조건 검색시 사용한 필드
 	
 	private String search = "";
 	private String keyword = "";
@@ -41,4 +35,4 @@ public class CommonVO {
 	
 }
 
->>>>>>> branch 'master' of https://github.com/Jeong-jiho/pensionking.git
+

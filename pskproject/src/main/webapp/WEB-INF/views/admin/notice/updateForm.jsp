@@ -1,20 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/common.jspf"%>
-	
-		
-		
-			
 		
 		<link rel="stylesheet" type="text/css" href="/resources/include/css/board.css">
-		<link rel="stylesheet" type="text/css" href="/resources/include/css/common.css">
+		<link rel="stylesheet" type="text/css" href="/resources/include/css/common2.css">
 					
 					
 		<script type="text/javascript" src="/resources/include/js/jquery-1.12.4.min.js" ></script>
 		<script type="text/javascript" src="/resources/include/js/common.js"></script>
 		
 		<script type="text/javascript">
-   $(function() {
+   	  
+	  $(function() {
       
       /*저장 버튼 클릭 시 처리 이벤트(유효성검사)*/
       $("#noticeUpdateBtn").click(function() {
@@ -36,7 +33,7 @@
          location.href = "noticeList.do"
       });
    });
-   
+   		
 </script>
 
    <div class="contentContainer">

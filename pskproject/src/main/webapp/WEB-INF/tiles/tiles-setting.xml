@@ -5,28 +5,42 @@
  	
  	<!-- main -->
 	<definition name="intro" template="/WEB-INF/views/template/client/mainLayout.jsp">
-		<put-attribute name="title" value="펜션왕" />
 		<put-attribute name="header" value="/WEB-INF/views/template/client/header.jsp" />
-<<<<<<< HEAD
-		<put-attribute name="footer" value="/WEB-INF/views/template/client/footer.jsp"/>
-=======
 		<put-attribute name="footer" value="/WEB-INF/views/template/client/footer.jsp" />
->>>>>>> branch 'master' of https://github.com/Jeong-jiho/pensionking.git
 	</definition>
 	 
 	 	
    <definition name="content"
 	template="/WEB-INF/views/template/client/contentLayout.jsp">
-		<put-attribute name="title" value="펜션왕" />
+		
 		<put-attribute name="header" value="/WEB-INF/views/template/client/header.jsp"/>
 		<put-attribute name="body" value="" />
 		<put-attribute name="footer" value="/WEB-INF/views/template/client/footer.jsp"/>
 	</definition>
 	
-	<definition name="review/*" extends="content">
-		<put-attribute name="title" value="후기게시판" />
-		<put-attribute name="body" value="/WEB-INF/views/review/{1}.jsp"/>
+	<definition name="client/review/*" extends="content">
+		<put-attribute name="body" value="/WEB-INF/views/client/review/{1}.jsp"/>
 	</definition> 
+	
+	<definition name="client/reservation/*" extends="content">
+		<put-attribute name="body" value="/WEB-INF/views/client/reservation/{1}.jsp"/>
+	</definition> 
+	
+	<definition name="client/notice/*" extends="content">
+		<put-attribute name="body" value="/WEB-INF/views/client/notice/{1}.jsp"/>
+	</definition> 
+	
+	<definition name="client/qna/*" extends="content">
+		<put-attribute name="body" value="/WEB-INF/views/client/qna/{1}.jsp"/>
+	</definition> 
+	 
+	 <definition name="client/member/*" extends="content">
+	    <put-attribute name="body" value="/WEB-INF/views/client/member/{1}.jsp" />
+   	</definition>
+	 
+	<definition name="client/room/*" extends="content">
+	    <put-attribute name="body" value="/WEB-INF/views/client/room/{1}.jsp" />
+   	</definition>
 	 
 	<!-- 
 	<definition name="replies/*" extends="content">

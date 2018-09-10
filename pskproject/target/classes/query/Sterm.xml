@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pension.admin.sterm.dao.StermDao">
+	<!-- 성수기 기간 -->
+	<select id="getSterm" parameterType="sterm" resultType="sterm">
+		select to_char(st_start,'YYYY-MM-DD') st_start, to_char(st_end,'YYYY-MM-DD') st_end 
+		from s_term
+	</select>
+	
+ 	<insert id="stermInsert" parameterType="sterm">
+ 		insert into s_term values(s_term_seq.nextval, #{st_start}, #{st_end})
+ 	</insert>
+ 	
+ 	<delete id="stermDelete"> 
+ 		delete from s_term
+ 	</delete>
+ 	
+ 	<select id="confirm" resultType="int">
+ 		select count(*) from s_term
+ 	</select>
+</mapper> 

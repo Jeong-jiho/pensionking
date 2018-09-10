@@ -2,8 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/common.jspf"%>
 
-		<link rel="stylesheet" type="text/css" href="/resources/include/css/board.css">
-		<link rel="stylesheet" type="text/css" href="/resources/include/css/common.css">
+		<link rel="stylesheet" type="text/css" href="/resources/include/css/board.css"> 
+		<link rel="stylesheet" type="text/css" href="/resources/include/css/common2.css">
 		
 		<script type="text/javascript" src="/resources/include/js/jquery-1.12.4.min.js" ></script>
 		<script type="text/javascript" src="/resources/include/js/common.js" ></script>
@@ -35,8 +35,16 @@
 		
 		</script>
 		
-		
-		<p>공지사항 입력란</p>
+		<ol class="breadcrumb">
+	<li class="breadcrumb-item">
+	<a href="#">Admin</a>
+	</li>
+	<li class="breadcrumb-item active">게시판관리</li>
+	<li class="breadcrumb-item active">공지사항</li>
+	<li class="breadcrumb-item active">공지사항 입력</li>
+</ol>
+
+<div class="container-fluid">
 		
 		<div class="contentContainer">
 				
@@ -67,4 +75,5 @@
 				<input type="button" value="저장" class="but" id="noticeInsert">
 				<input type="button" value="목록" class="but" id="noticeListBtn">
 			</div>
-		</div>
+		</div> 
+</div>

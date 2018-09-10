@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pension.admin.stock.dao.StockDao">
+<select id="stockList" parameterType="stock" resultType="stock">
+	/* Stock - stockList */
+	SELECT s_no, s_name, s_ea, s_price from stock order by s_no
+</select>
+
+<insert id="stockInsert" parameterType="stock">
+	/* Stock - stockInsert */
+	insert into stock (s_no, s_name, s_ea, s_price) 
+	values(stock_seq.nextval, #{s_name}, #{s_ea}, #{s_price})
+</insert>
+<update id="stockUpdate" parameterType="stock"> 
+	/* Stock - stockUpdate */
+	UPDATE stock set s_name = #{s_name}, s_ea = #{s_ea}, s_price = #{s_price} where s_no = #{s_no}
+</update>
+<delete id="stockDelete" parameterType="stock">
+	/* Stock - stockDelete */
+	DELETE FROM stock WHERE s_no = #{s_no}
+</delete> 
+</mapper> 

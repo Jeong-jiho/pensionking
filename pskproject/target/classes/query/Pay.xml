@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pension.admin.pay.dao.PayDao">
+	<select id="payConfirmList" parameterType="pay" resultType="pay">
+		select pay_no, res_gno, m_name, pay_bank, pay_acc,pay_price, to_char(pay_date,'YYYY-MM-DD')pay_date
+		 from pay inner join member using(m_no) where a_confirm = 0
+	</select>
+	
+	<select id="payAllList" parameterType="pay" resultType="pay">
+		select pay_no, res_gno, m_name, pay_bank, pay_acc,pay_price, to_char(pay_date,'YYYY-MM-DD')pay_date,a_confirm
+		from pay inner join member using(m_no)
+	</select>
+	
+	<select id="myPayList" parameterType="pay" resultType="pay">
+		select pay_no ,res_no, r_no,  r_name, r_main,to_char(res_date,'YYYY-MM-DD') res_date, res_night,
+		res_state, res_people, res_price, res_bbq, res_update, to_char(res_indate,'YYYY-MM-DD') 
+		res_indate, to_char(res_outdate,'YYYY-MM-DD') res_outdate,r_standard, r_max , res_gno, pay_bank, pay_acc,pay_price,
+		to_char(pay_date,'YYYY-MM-DD')pay_date,a_confirm, ceil(res_Indate-sysdate) dday from pay  right outer join reservation using(res_gno) right outer 
+		join room using(r_no) where pay.m_no=#{m_no} order by pay_no, res_no
+	</select>
+	 
+	<select id="payDetail" parameterType="pay" resultType="pay">
+		select pay_no, m_name,m_phone, r_name,to_char(res_date,'YYYY-MM-DD') res_date, res_night,
+		to_char(res_outdate,'YYYY-MM-DD'), res_bbq,to_char(res_indate,'YYYY-MM-DD')res_indate,
+		pay_bank, pay_acc, pay_price, to_char(pay_date,'YYYY-MM-DD')pay_date
+		from pay inner join reservation using(res_no) inner join member using(m_no) 
+		inner join room using(r_no)
+	</select>
+	  
+	<update id="payAllUpdate" parameterType="pay">
+		update pay set a_confirm = 1
+	</update>
+	
+	<update id="payUpdate" parameterType="pay">
+		update pay set a_confirm = #{a_confirm} where pay_no = #{pay_no}
+	</update>
+	
+	<insert id="payInsert" parameterType="pay">
+		insert into pay(pay_no,pay_bank,pay_acc,pay_price,res_gno,m_no) values(pay_seq.nextval,#{pay_bank},#{pay_acc},#{pay_price},
+		#{res_gno},#{m_no}) 
+	</insert>
+	
+	<insert id="cancelInsert" parameterType="pay">
+		insert into res_cancel values(cancel_seq.nextval,sysdate,#{c_price},#{dday},2,#{res_gno})
+	</insert> 
+	
+	<select id="payDday" parameterType="pay" resultType="int">
+		select ceil((select distinct res_indate from reservation where res_gno=#{res_gno})-sysdate) dday from dual
+	</select>
+</mapper>  

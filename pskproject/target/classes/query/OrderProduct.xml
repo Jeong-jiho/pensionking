@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pension.admin.orderProduct.dao.OrderProductDao">
+<select id="orderProductList" parameterType="orderProduct" resultType="orderProduct">
+	/* OrderProduct - orderProductList */
+SELECT * from s_order_product
+</select>
+<insert id="orderProductInsert" parameterType="orderProduct">
+	/* OrderProduct - orderProductInsert */
+INSERT into s_order_product(o_no, op_name, op_ea, op_price, op_sumprice)
+VALUES(#{o_no}, #{op_name}, #{op_ea}, #{op_price}, #{op_sumprice})
+</insert>
+</mapper>

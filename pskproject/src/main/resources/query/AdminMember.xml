@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pension.admin.member.dao.AdminMemberDao">
+<select id="memberList" parameterType="adminMember" resultType="Member">
+	SELECT m_no, m_name, m_phone, m_id, m_date, m_update, m_retiredate, m_status from member
+	<where>
+		<if test="search=='m_no'">
+			<![CDATA[ m_no LIKE '%'|| #{keyword} ||'%' ]]>
+		</if>
+		<if test="search=='m_name'">
+			<![CDATA[ m_name LIKE '%'|| #{keyword} ||'%' ]]>
+		</if>
+		<if test="search=='m_id'">
+			<![CDATA[ m_id LIKE '%'|| #{keyword} ||'%' ]]>
+		</if>
+	</where>
+</select>
+<select id="memberDetail" parameterType="Member" resultType="Member">
+	SELECT m_no, m_name, m_phone, m_gender, m_email, m_id, m_pwd, m_date, m_update, m_retiredate from member
+</select>
+</mapper> 

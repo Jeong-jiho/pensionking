@@ -1,12 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+   pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
+<%@ include file="/WEB-INF/views/common/common.jspf"%>
 <%@ page trimDirectiveWhitespaces="true"%>
-<!DOCTYPE html>
-<html lang="en">
-<<<<<<< HEAD
+
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,194 +14,143 @@
 <meta name="author" content="">
 <!--  <link rel="icon" href="/resources/include/favicon.ico"> -->
 
-<title>Cover Template for Bootstrap</title>
-=======
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    
-    <link rel="icon" href="/resources/include/favicon.ico">
-    <title><tiles:getAsString name="title"/></title>
 
-    <!-- Bootstrap core CSS -->
-    <link href="/resources/include/dist/css/bootstrap.min.css" rel="stylesheet">
->>>>>>> branch 'master' of https://github.com/Jeong-jiho/pensionking.git
 
-<<<<<<< HEAD
+<script type="text/javascript" src="/resources/include/js/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="/resources/include/js/common.js"></script>
+<script type="text/javascript" src=" /resources/include/dist/roominfo/tport.js"></script>
+<script type="text/javascript" src=" /resources/include/dist/roominfo/glide.js"></script>
+<script src=" /resources/include/dist/roominfo/jquery-3.3.1.min.js"></script>
+<script src=" /resources/include/dist/roominfo/tport.js"></script>
+<script src=" /resources/include/dist/roominfo/glide.js"></script>
 <!-- Bootstrap core CSS -->
-<link href="/resources/include/dist/css/bootstrap.min.css"
-	rel="stylesheet">
-=======
-    <!-- Custom styles for this template -->
-    <link href="/resources/include/dist/css/cover.css" rel="stylesheet">
->>>>>>> branch 'master' of https://github.com/Jeong-jiho/pensionking.git
 
-<<<<<<< HEAD
 <!-- Custom styles for this template -->
-<link href="/resources/include/dist/css/cover.css" rel="stylesheet">
-<link rel="stylesheet" href="/resources/include/css/main.css" />
-=======
-    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
-    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-    <script src="/resources/include/dist/assets/js/ie-emulation-modes-warning.js"></script>
->>>>>>> branch 'master' of https://github.com/Jeong-jiho/pensionking.git
+<link rel="stylesheet" href="/resources/include/css/carousel.css" />
+<link href="/resources/include/dist/maincss/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="/resources/include/css/sticky-footer-navbar.css" />
 
-<<<<<<< HEAD
 <style type="text/css">
+   body {
+      /*  background: url('/resources/image/bgimage.png') no-repeat center center fixed; 
+       -webkit-background-size: cover;
+       -moz-background-size: cover;
+       -o-background-size: cover;
+       background-size: cover; */
+       background-color: #EAEAEA
+   }
 </style>
-<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
-<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
 
-
-<script
-	src="/resources/include/dist/assets/js/ie-emulation-modes-warning.js"></script>
-
-<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-<!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
 </head>
-=======
- 
-  </head>
->>>>>>> branch 'master' of https://github.com/Jeong-jiho/pensionking.git
+<body>
+   
+   <!-- nav(네비게이션), 헤더 설정 -->
+   <tiles:insertAttribute name="header" />
+   <!-- header 끝 -->
+   
+   <!-- Carousel
+    ================================================== -->
+   <div>
+   <div id="myCarousel" class="carousel slide" data-ride="carousel">
+   
+      <!-- Indicators -->
+      <ol class="carousel-indicators">
+         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+         <li data-target="#myCarousel" data-slide-to="1"></li>
+         <li data-target="#myCarousel" data-slide-to="2"></li>
+      </ol>
+      <div class="carousel-inner" role="listbox">
+         <div class="item active">
+            <img src="/resources/image/main3.jpg ">
+         </div>
+         <div class="item">
+            <img src="/resources/image/main4.jpg " alt="Second slide">
+         </div>
+         <div class="item">
+            <img src="/resources/image/main5.jpg " alt="Third slide">
+         </div>
+      </div>
+      <a class="left carousel-control" href="#myCarousel" role="button"
+         data-slide="prev"> <span class="glyphicon glyphicon-chevron-left"
+         aria-hidden="true"></span> <span class="sr-only">Previous</span>
+      </a> <a class="right carousel-control" href="#myCarousel" role="button"
+         data-slide="next"> <span
+         class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+         <span class="sr-only">Next</span>
+      </a>
+      
+   </div>
+   <!-- /.carousel -->
 
-<<<<<<< HEAD
-<body class="home page-template-default page page-id-5">
-	<!-- nav(네비게이션), 헤더 설정 -->
-	<tiles:insertAttribute name="header" />
-	<!-- header 끝 -->
-=======
-  <body>
 
-    <div class="site-wrapper">
-		
-      <div class="site-wrapper-inner">
+   <!-- Marketing messaging and featurettes
+    ================================================== -->
+   <!-- Wrap the rest of the page in another container to center all the content. -->
 
-        <div class="cover-container">
+   <div class="container marketing">
 
-          <div class="masthead clearfix">
-            <div class="inner">
-              <h3 class="masthead-brand">Cover</h3>
-              <nav>
-                <ul class="nav masthead-nav">
-                  <li class="active"><a href="/">Home</a></li>
-                  <li><a href="#">Features</a></li>
-                  <li><a href="/review/reviewList.do">Review</a></li>
-                  <li><a href="#">Reservation</a></li>
-                </ul>
-              </nav>
-            </div>
-          </div>
+      <!-- Three columns of text below the carousel -->
 
-          <div class="inner cover">
-            <h1 class="cover-heading">Cover your page.</h1>
-            <p class="lead">Cover is a one-page template for building simple and beautiful home pages. Download, edit the text, and add your own fullscreen background photo to make it your own.</p>
-            <p class="lead">
-              <a href="#" class="btn btn-lg btn-default">Learn more</a>
-            </p>
-          </div>
+      <!-- START THE FEATURETTES -->
 
-          <div class="mastfoot">
-            <div class="inner">
-              <p>사업자등록번호: 128-23-45267 | 대표: 정지호 |
-  	개인정보보호책임자: 김철수 | 이메일: jjiho318@naver.com | 서울특별시 성동구 무학로2길 54(신방빌딩)<a href="http://getbootstrap.com">Bootstrap</a>, by <a href="https://twitter.com/mdo">@mdo</a>.</p>
-            </div>
-          </div>
+      <hr class="featurette-divider">
 
-        </div>
+      <div class="row featurette">
+         <div class="col-md-7">
+            <h2 class="featurette-heading">
+               PENSIONKING POOL <span class="text-muted"></span>
+            </h2>
+            <p class="lead">최고의 시설</p>
+            <p><a class="btn btn-default" href="/room/roomInfo.do" role="button">객실 둘러보기</a></p>
+         </div>
+         <div class="col-md-5">
+            <img class="featurette-image img-responsive"
+               src="/resources/image/land1.jpg" alt="Generic placeholder image">
+         </div>
+      </div>
+
+      <hr class="featurette-divider">
+
+      <div class="row featurette">
+         <div class="col-md-5">
+            <img class="featurette-image img-responsive"
+               src="/resources/image/land2.jpg" alt="Generic placeholder image">
+         </div>
+         <div class="col-md-7">
+            <h2 class="featurette-heading">
+               BBQ<span class="text-muted"></span>
+            </h2>
+            <p class="lead">사랑하는 가족 또는 연인과 함께</p>
+            <p><a class="btn btn-default" href="/room/amenity.do" role="button">부대시설 보기</a></p>
+         </div>
+         
+      </div>
+      
+      <hr class="featurette-divider">
+
+      <!-- /END THE FEATURETTES -->
 
       </div>
->>>>>>> branch 'master' of https://github.com/Jeong-jiho/pensionking.git
+      
+      <!-- FOOTER -->
 
-<<<<<<< HEAD
-	<section id="banner">
-		<div class="full-featured">
-			<img class="hidden-xs" id="banner-bg" src="/resources/image/main.jpg">
-			<img class="visible-xs" id="m-banner-bg" src="/resources/image/main.jpg">
-		</div>
-	</section>
+      <footer class=footer>
+      <!-- footer 설정 -->
+      <tiles:insertAttribute name="footer" />
+      </footer>
+   
+   <!-- /.container -->
+   </div>
 
-	<div class="isl-bg">
-		<section id="content" style="margin-bottom: 40px;">
-			<div class="container-fluid">
-				<div class="row">
-					<div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
-						<h2 class="small-title">펜션왕 소개</h2>
-						<p class="description">최고의 시설과 서비스를 제공하는 펜션왕</p>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1">
-						<div class="column-content first"></div>
-					</div>
-				</div>
-			</div>
-		</section>
-	</div>
-	
-	<div class="row">
-		<div class="col-xs-12 bottom-images">
-			<a class="profile " data-0="@class:profile nosnap;"
-				data-90p-top="@class:profile snap;"
-				href="#">
-				<img src="/resources/image/location1.png"	alt="Room Info">
-				<span class="name">Room Info</span>
-			</a> <a class="profile " data-0="@class:profile nosnap;"
-				data-90p-top="@class:profile snap-delay;"
-				href="#">
-				<img src="/resources/image/location2.png"	alt="Gallery">
-				<span class="name">Gallery</span>
-			</a>
-		</div>
-	</div>
-	
-	<!-- 갤러리 박스 추가시 주석 해제 -->
-	<!-- <div class="row">
-		<div class="col-xs-12 bottom-images">
-			<a class="profile " data-0="@class:profile nosnap;"
-				data-90p-top="@class:profile snap;"
-				href="https://weareisland.com/portfolio/wanuskewin-heritage-park/">
-				<img src="/resources/image/location1.jpg"	alt="Wanuskewin Heritage Park"> 
-				<span class="name">QnA</span>
-			</a> <a class="profile " data-0="@class:profile nosnap;"
-				data-90p-top="@class:profile snap-delay;"
-				href="https://weareisland.com/portfolio/chief-whitecap-waterway/">
-				<img src="/resources/image/location1.jpg"	alt="Chief Whitecap Waterway"> 
-				<span class="name">Contact</span>
-			</a>
-		</div>
-	</div> -->
-
-	<!-- Bootstrap core JavaScript
-=======
-    </div>
-
-    <!-- Bootstrap core JavaScript
->>>>>>> branch 'master' of https://github.com/Jeong-jiho/pensionking.git
+   <!-- Bootstrap core JavaScript
     ================================================== -->
-<<<<<<< HEAD
-	<!-- Placed at the end of the document so the pages load faster -->
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-	<script src="/resources/include/dist/js/bootstrap.min.js"></script>
-	<script src="/resources/include/dist/assets/js/docs.min.js"></script>
-	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-	<script
-		src="/resources/include/dist/assets/js/ie10-viewport-bug-workaround.js"></script>
+   <!-- Placed at the end of the document so the pages load faster -->
+   
+   <script
+      src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+   
+   <script type="text/javascript"
+      src="/resources/include/dist/js/bootstrap.min.js"></script>
+   <script type="text/javascript" src="/resources/include/js/docs.min.js"></script>
+   <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 </body>
-</html>
-=======
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script src="/resources/include/dist/js/bootstrap.min.js"></script>
-    <script src="/resources/include/assets/js/docs.min.js"></script>
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="/resources/include/assets/js/ie10-viewport-bug-workaround.js"></script>
-  </body>
-</html>
->>>>>>> branch 'master' of https://github.com/Jeong-jiho/pensionking.git

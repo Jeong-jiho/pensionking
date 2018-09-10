@@ -1,26 +1,72 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.pension.client.reservation.dao.ReservationDao">
-	<select id="reservationList" parameterType="reservation" resultType="reservation">
+<mapper namespace="com.pension.admin.reservation.dao.ReservationDao">
+	<select id="resList" parameterType="reservation" resultType="reservation">
 		SELECT
-		res_no, r_no, m_no, res_date, res_night, res_people, res_price, res_bbq,
-		res_update, res_indate, res_outdate
-		FROM
-		reservation
-		ORDER BY res_no desc
+		res_gno, res_no, r_no, m_no,m_name,r_name, r_main,to_char(res_date,'YYYY-MM-DD') res_date, res_night,
+		res_state, res_people, res_price, res_bbq, res_update, to_char(res_indate,'YYYY-MM-DD') 
+		res_indate, to_char(res_outdate,'YYYY-MM-DD') res_outdate,r_standard, r_max
+		FROM reservation inner join member using(m_no) inner join room 
+		using(r_no) inner join price using(r_no)  
+		<where>
+			<if test="schDateType=='resDay'">
+				<![CDATA[to_char(res_date,'YYYY-MM-DD') between #{schStart} and #{schEnd}	]]>
+			</if>
+			<if test="schDateType=='useDay'">
+				<![CDATA[to_char(res_indate,'YYYY-MM-DD') between #{schStart} and #{schEnd}]]>
+			</if>
+
+			<if test="schState!='전체'">
+				<![CDATA[and res_state like '%' || #{schState} || '%']]>
+			</if>
+			
+			<if test="schText!=''">
+				<![CDATA[and m_name like '%' || #{schText} || '%' or m_phone like '%' || #{schText} || '%'
+				or res_gno like '%' || #{schText} || '%']]>  
+			</if>
+			<if test="schR_no!=0">
+				<![CDATA[and r_no = #{schR_no}]]>
+			</if>
+			<if test="schIndate!=''">
+				<![CDATA[and to_char(res_indate,'YYYY-MM-DD') like #{schIndate}]]>
+			</if>
+			<if test="m_no!=0">
+				<![CDATA[and m_no = #{m_no}]]>
+			</if>
+		</where>  
+		ORDER BY res_no,res_gno desc 
 	</select>
 	
-	<!-- 예약 등록 -->
-	<insert id="reservationInsert" parameterType="reservation">
-		<selectKey keyProperty="res_no" resultType="int" order="BEFORE">
-			select res_no from dual
-		</selectKey>
-		INSERT into reservation(res_no, r_no, m_no, res_date, res_night, res_people, res_price, 
-		res_update, res_indate, res_outdate, res_bbq)
-		values(
-		#{res_no}, #{r_no}, #{m_no}, #{res_date}, #{res_nigt}, #{res_people}, #{res_price}, 
-		#{res_update}, #{res_indate}, #{res_outdate}, #{res_bbq})
-		)
-	</insert>
+	<insert id="resInsert" parameterType="pay">
+		insert into reservation (res_no, r_no, m_no, res_date, res_night, res_people, res_price, res_indate, res_outdate, res_bbq,res_state)
+		values(#{r_no}||substr(#{res_indate},1,4)||substr(#{res_indate},6,2)||substr(#{res_indate},9,2)||#{m_no}||res_seq.nextval,#{r_no},
+		 #{m_no}, sysdate, #{res_night}, #{res_people}, #{res_price}, #{res_indate}, #{res_outdate}, #{res_bbq},'입금대기')
+	</insert> 
+	
+	<!-- 예약정보확인 -->
+	<select id="resStateList" parameterType="reservation" resultType="reservation">
+		select r_no, res_no,substr(res_no,1,12) res_no1, res_date, r_name, res_state from reservation inner join room using(r_no)
+		<where>
+			<if test="res_indate!=''">
+				<![CDATA[to_char(res_indate,'YYYY-MM-DD') like #{res_indate}]]>
+			</if> 
+		</where>  
+	</select>
+	 
+	<select id="resRoom" parameterType="String" resultType="reservation">
+		select r_no from reservation inner join room using(r_no) where to_char(res_indate,'YYYY-MM-DD') like #{res_indate} and res_state != '예약취소'
+	</select>
+	
+	<update id="resStateUpdate" parameterType="pay">
+		update reservation set res_state=#{res_state} where res_gno=#{res_gno} 
+	</update>
+	
+	<select id="getResNo" parameterType="reservation" resultType="String">
+		select res_no from reservation where r_no=#{r_no} and to_char(res_indate,'yyyy-mm-dd') like #{res_indate} and res_state!='예약취소'
+	</select>
+	
+	<update id="resGnoUpdate" parameterType="reservation">
+		update reservation set res_gno = #{res_gno} where to_char(res_indate,'yyyy-mm-dd') like #{res_indate} and res_gno is null
+	</update>
 </mapper>

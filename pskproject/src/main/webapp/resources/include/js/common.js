@@ -19,7 +19,7 @@ function chkSubmit(item, msg){
 	if(item.val().replace(/\s/g,"")==""){	 
 		alert(msg+" 입력해주세요");
 		item.val("");
-		itme.focus();
+		item.focus();
 		return false;
 	}else{
 		return true;
@@ -103,3 +103,17 @@ function inputVerify(index, data, printarea){
 		return true;
 	}
 }
+function checkNumber(main, item){
+	var pattern=/^[0-9]+$/;
+	if(!pattern.test(main.val())) {
+		item.html("숫자만 입력해 주세요");
+		main.val("");
+		main.focus();
+		return false;
+	}else{
+		return true;
+	}
+ }
+
+
+

@@ -50,10 +50,9 @@ public class ReviewServiceImpl implements ReviewService {
 	@Override
 	public ReviewVO reviewDetail(ReviewVO rvo) {
 		ReviewVO detail = new ReviewVO();
-						
+		reviewDao.updateCnt(rvo.getRv_no());				
 		detail = reviewDao.reviewDetail(rvo);
-		
-		
+				
 		return detail;
 	}
 	
@@ -91,7 +90,7 @@ public class ReviewServiceImpl implements ReviewService {
 		return result;
 	}
 		
-	// 댓글 조회수
+	// 댓글 갯수
 	@Override
 	public int replyCount(int rv_no) {
 		int result = replyDao.replyCount(rv_no);

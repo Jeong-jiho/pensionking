@@ -29,7 +29,7 @@
 				 as state FROM dual
 	
 	</select>
-	
+	 
 	<!-- 댓글 삭제 -->
 	<delete id="replyDelete" parameterType="int">
 	DELETE FROM reply WHERE rp_no=#{rp_no}

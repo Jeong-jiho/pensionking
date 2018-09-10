@@ -2,19 +2,32 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
 
 <configuration>
+	<!-- 관리자 -->
 	<typeAliases>
-<<<<<<< HEAD
-		<typeAlias type="com.pension.admin.room.vo.RoomVO" alias="room" />
-		<typeAlias type="com.pension.client.reservation.vo.ReservationVO" alias="reservation"/>
-	</typeAliases> 
-</configuration>
-=======
 		<typeAlias type="com.pension.admin.room.vo.RoomVO" alias="room" /> 
-		<typeAlias type="com.pension.client.review.vo.ReviewVO" alias="review" />
-		<typeAlias type="com.pension.client.reply.vo.ReplyVO" alias="reply" />
+		<typeAlias type="com.pension.common.image.vo.ImageVO" alias="image" /> 
+		<typeAlias type="com.pension.admin.price.vo.PriceVO" alias="price" /> 
+		<typeAlias type="com.pension.admin.reservation.vo.ReservationVO" alias="reservation" /> 
+		<typeAlias type="com.pension.admin.sterm.vo.StermVO" alias="sterm" /> 
+		<typeAlias type="com.pension.admin.pay.vo.PayVO" alias="pay"/>  
 		<typeAlias type="com.pension.admin.notice.vo.NoticeVO" alias="notice" />
+		<typeAlias type="com.pension.admin.statistics.vo.StatisticsVO" alias="statistics" />
+		<typeAlias type="com.pension.admin.login.vo.AdminLoginVO" alias="adminLogin" /> 
+		<typeAlias type="com.pension.admin.stock.vo.StockVO" alias="stock" />
+	       <typeAlias type="com.pension.admin.order.vo.OrderVO" alias="order" /> 
+	       <typeAlias type="com.pension.admin.orderProduct.vo.OrderProductVO" alias="orderProduct" />
+	       <typeAlias type="com.pension.admin.employee.vo.EmployeeVO" alias="employee" />
+	       <typeAlias type="com.pension.admin.member.vo.AdminMemberVO" alias="adminMember" />  
+	<!-- 클라이언트 -->
+		<typeAlias type="com.pension.client.review.vo.ReviewVO" alias="review" />
+		<typeAlias type="com.pension.client.reply.vo.ReplyVO" alias="reply" /> 
+		<typeAlias type="com.pension.client.qna.vo.QnaVO" alias="qna" />
+		<typeAlias type="com.pension.client.member.vo.MemberVO" alias="member" />
+		<typeAlias type="com.pension.client.member.vo.MemberSecurity" alias="security" />
+		<typeAlias type="com.pension.client.login.vo.LoginVO" alias="login" />
+		 
 	</typeAliases>  
 </configuration> 
  
 
->>>>>>> branch 'master' of https://github.com/Jeong-jiho/pensionking.git
+ 

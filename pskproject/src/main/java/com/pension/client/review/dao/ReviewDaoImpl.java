@@ -54,7 +54,7 @@ public class ReviewDaoImpl implements ReviewDao{
 	
 	// 조회수 확인
 	@Override
-	public int updateCnt(Integer rv_no) throws Exception {
+	public int updateCnt(int rv_no){
 		return session.update("updateCnt", rv_no);
 	}		
 

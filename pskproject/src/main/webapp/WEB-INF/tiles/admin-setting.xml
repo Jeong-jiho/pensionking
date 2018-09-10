@@ -4,20 +4,76 @@
 	<definition name="basic" template="/WEB-INF/views/template/admin/contentLayout.jsp">
 		<put-attribute name="title" value="pensionKing" />
 		<put-attribute name="header" value="/WEB-INF/views/template/admin/header.jsp" />
-		<put-attribute name="sub" value="/WEB-INF/views/template/admin/sub.jsp" />
 		<put-attribute name="left" value="/WEB-INF/views/template/admin/left.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/views/template/admin/footer.jsp" />
+	</definition>
+	
+	<definition name="admin/main/*" extends="basic">
+		<put-attribute name="title" value="객실 관리 페이지"></put-attribute>
+		<put-attribute name ="main" value="/WEB-INF/views/admin/main/{1}.jsp" />
 	</definition>
 	
 	<definition name="admin/room/*" extends="basic">
 		<put-attribute name="title" value="객실 관리 페이지"></put-attribute>
-		<put-attribute name="sub" value="/WEB-INF/views/template/admin/sub.jsp" />
 		<put-attribute name ="main" value="/WEB-INF/views/admin/room/{1}.jsp" />
 	</definition>
+
+	<definition name="admin/chart/*" extends="basic">
+		<put-attribute name="title" value="통계 페이지"></put-attribute>
+		<put-attribute name ="main" value="/WEB-INF/views/admin/chart/{1}.jsp" />
+	</definition>
 	
+	<definition name="admin/reservation/*" extends="basic">
+		<put-attribute name="title" value="예약 페이지"></put-attribute>
+		<put-attribute name ="main" value="/WEB-INF/views/admin/reservation/{1}.jsp" />
+	</definition>
+
 	<definition name="admin/notice/*" extends="basic">
 		<put-attribute name="title" value="공지사항 관리"></put-attribute>
 		<put-attribute name="left" value="/WEB-INF/views/template/admin/left.jsp" />
 		<put-attribute name ="main" value="/WEB-INF/views/admin/notice/{1}.jsp" />
 	</definition>
-	 
+	
+	<definition name="admin/review/*" extends="basic">
+		<put-attribute name="title" value="후기 관리"></put-attribute>
+		<put-attribute name="left" value="/WEB-INF/views/template/admin/left.jsp" />
+		<put-attribute name ="main" value="/WEB-INF/views/admin/review/{1}.jsp" />
+	</definition>
+	
+	<definition name="admin/qna/*" extends="basic">
+		<put-attribute name="title" value="후기 관리"></put-attribute>
+		<put-attribute name="left" value="/WEB-INF/views/template/admin/left.jsp" />
+		<put-attribute name ="main" value="/WEB-INF/views/admin/qna/{1}.jsp" />
+	</definition>
+	
+	<definition name="admin/stock/*" extends="basic">
+      <put-attribute name="title" value="재고 관리 페이지"></put-attribute>
+	  <put-attribute name="left" value="/WEB-INF/views/template/admin/left.jsp" />
+      <put-attribute name ="main" value="/WEB-INF/views/admin/stock/{1}.jsp" />
+   </definition>
+   
+   <definition name="admin/employee/*" extends="basic">
+      <put-attribute name="title" value="직원 관리 페이지"></put-attribute>
+      <put-attribute name="left" value="/WEB-INF/views/template/admin/left.jsp" />
+      <put-attribute name ="main" value="/WEB-INF/views/admin/employee/{1}.jsp" />
+   </definition>
+   
+   <definition name="admin/member/*" extends="basic">
+      <put-attribute name="title" value="회원 관리 페이지"></put-attribute>
+      <put-attribute name="left" value="/WEB-INF/views/template/admin/left.jsp" />
+      <put-attribute name ="main" value="/WEB-INF/views/admin/member/{1}.jsp" />
+   </definition>
+   
+   <definition name="admin/order/*" extends="basic">
+      <put-attribute name="title" value="회원 관리 페이지"></put-attribute>
+      <put-attribute name="left" value="/WEB-INF/views/template/admin/left.jsp" />
+      <put-attribute name ="main" value="/WEB-INF/views/admin/order/{1}.jsp" />
+   </definition>
+   
+   <definition name="admin/orderProduct/*" extends="basic">
+      <put-attribute name="title" value="회원 관리 페이지"></put-attribute>
+      <put-attribute name="left" value="/WEB-INF/views/template/admin/left.jsp" />
+      <put-attribute name ="main" value="/WEB-INF/views/admin/orderProduct/{1}.jsp" />
+   </definition>
+
 </tiles-definitions>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pension.admin.order.dao.OrderDao">
+<select id="orderList" parameterType="order" resultType="order">
+	/* Order - orderList */
+	SELECT o_no, o_date, o_price, o_update from s_order order by o_no
+</select>
+<insert id="orderInsert" parameterType="order">
+INSERT into s_order(o_no, o_date, o_price)
+VALUES(#{o_no}, sysdate, #{o_price})
+</insert>
+</mapper> 

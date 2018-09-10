@@ -3,13 +3,9 @@
 <%@ include file="/WEB-INF/views/common/common.jspf"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<link rel="stylesheet" type="text/css"
-	href="/resources/include/css/board.css">
-<link rel="stylesheet" type="text/css"
-	href="/resources/include/css/common.css">
+<link rel="stylesheet" type="text/css" href="/resources/include/css/common2.css">
 
-<script type="text/javascript"
-	src="/resources/include/js/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="/resources/include/js/jquery-1.12.4.min.js"></script>
 <script type="text/javascript" src="/resources/include/js/common.js"></script>
 <script type="text/javascript">
 		
@@ -51,15 +47,7 @@
 
 	</form>
 
-	<!-- =========비밀번호 확인 버튼 및 버튼 추가 시작========= -->
-	<table id="noticePwdBut">
-		<tr>
-			<td id="btd2"><input type="button" value="수정" id="updateFormBtn">
-				<input type="button" value="삭제" id="noticeDeleteBtn"> <input
-				type="button" value="목록" id="noticeListBtn"></td>
-		</tr>
-	</table>
-	<!-- =========비밀번호 확인 버튼 및 버튼 추가 종료========= -->
+	
 
 	<!-- =========상세 정보 보여주기 시작========= -->
 	<div class="contentTB">
@@ -92,4 +80,11 @@
 			</tbody>
 		</table>
 	</div>
+	
+	<div class="contentBtn">
+			<input type="button" value="수정" id="updateFormBtn">
+			<input type="button" value="삭제" id="noticeDeleteBtn"> 
+			<input	type="button" value="목록" id="noticeListBtn">
+	</div>
+	
 </div>

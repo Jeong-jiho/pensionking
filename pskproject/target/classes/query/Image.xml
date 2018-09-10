@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pension.common.image.dao.ImageDao">
+	<!-- 이미지 추가 -->
+	<insert id="roomImageInsert" parameterType="room">
+		insert into r_image values(image_seq.nextval, #{filename}, #{i_kind}, #{r_no})
+	</insert>
+	
+	<!-- 메인 이미지 추가 -->
+	<insert id="roomMainImageInsert" parameterType="room">
+		insert into r_image values(#{i_no}, #{filename}, #{i_kind}, #{r_no})
+	</insert> 
+	
+	<!-- 이미지 목록 불러오기 -->
+	<select id="roomImageList" parameterType="image" resultType="image">
+		select i_no, r_no, i_name from r_image where r_no = #{r_no} order by i_no 
+	</select>
+	 
+	<!-- 객실 관련 이미지 전체삭제 -->
+	<delete id="imageAllDelete" parameterType="room">
+		delete from r_image where r_no=#{r_no} 
+	</delete> 
+	
+	<!-- 특정 이미지 삭제 -->
+	<delete id="imageDelete" parameterType="image">
+		delete from r_image where r_no=#{r_no} and i_name=#{i_name}
+	</delete>
+	
+</mapper>

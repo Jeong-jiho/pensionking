@@ -2,14 +2,14 @@ package com.pension.client.review.vo;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import com.pension.common.vo.CommonVO;
+import com.pension.admin.price.vo.PriceVO;
 
-public class ReviewVO extends CommonVO {
+public class ReviewVO extends PriceVO {
 
-	private int rv_no 		  =0;   //후기 번호
+	private int rv_no =0;		    //후기 번호
 	private String rv_title = "";	//후기 제목
 	private String rv_content ="";  //후기 내용
-	private String rv_date	  ="";  //작성일
+	private String rv_date ="";     //작성일
 	private String rv_pwd = "";     //비밀번호
 	private String rv_update ="";   //수정일
 	private String rv_name= "";     //작성자
@@ -19,7 +19,14 @@ public class ReviewVO extends CommonVO {
 	// 파일 업로드를 위한 필드
 	private MultipartFile file; 	//첨부파일
 	private String rv_file="";
+	
+	//조건 검색시 사용한 필드
+	private String search = "";
+	private String keyword = "";
+	private String start_date = "";
+	private String end_date = "";
 		
+	
 		
 	public int getRv_no() {
 		return rv_no;
@@ -87,6 +94,29 @@ public class ReviewVO extends CommonVO {
 	public void setRp_cnt(int rp_cnt) {
 		this.rp_cnt = rp_cnt;
 	}
-	
+	public String getSearch() {
+		return search;
+	}
+	public void setSearch(String search) {
+		this.search = search;
+	}
+	public String getKeyword() {
+		return keyword;
+	}
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
+	public String getStart_date() {
+		return start_date;
+	}
+	public void setStart_date(String start_date) {
+		this.start_date = start_date;
+	}
+	public String getEnd_date() {
+		return end_date;
+	}
+	public void setEnd_date(String end_date) {
+		this.end_date = end_date;
+	}
 	
 }

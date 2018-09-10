@@ -1,6 +1,9 @@
 package com.pension.admin.notice.vo;
 
-public class NoticeVO {
+import com.pension.client.review.vo.ReviewVO;
+
+
+public class NoticeVO extends ReviewVO{
 
 	private  int n_no=0;
 	private String n_title="";
@@ -8,7 +11,8 @@ public class NoticeVO {
 	private String n_writer="";
 	private String n_date="";
 	private String n_update="";
-	 
+	
+	
 	
 	public int getN_no() {
 		return n_no;

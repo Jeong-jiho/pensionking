@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pension.client.qna.dao.QnaDao">
+
+	<select id="qnaList" parameterType="qna" resultType="qna">
+	SELECT a.q_no, q_title, m_id, readcnt,
+	to_char(q_date, 'YYYY-MM-DD') AS q_date 
+	FROM qna a inner join member m on a.m_no= m.m_no 
+	<where>
+		<if test="search=='q_title'">
+			<![CDATA[q_title LIKE '%'|| #{keyword} ||'%']]>
+		</if>	
+		<if test="search=='q_content'">
+			<![CDATA[q_content LIKE '%'|| #{keyword} ||'%']]>
+		</if>	
+		<if test="search=='m_id'">
+			<![CDATA[m_id LIKE '%'|| #{keyword} ||'%']]>
+		</if>
+		<if test="search=='q_date'">
+			<![CDATA[to_char(q_date, 'YYYY-MM-DD') between #{start_date} and #{end_date} ]]>
+		</if>
+		<if test="m_no!=0">
+			<![CDATA[m.m_no = #{m_no}]]>
+		</if>  
+	</where>
+	order by q_no desc	
+	</select>	
+	
+	<!-- 게시물 입력 --> 
+	<insert id="qnaInsert" parameterType="qna" >
+	INSERT INTO qna(q_no, m_no, q_title ,q_content, q_pwd) 
+	VALUES(qna_seq.nextval ,#{m_no} ,#{q_title} ,#{q_content} ,#{q_pwd})
+	</insert>
+	
+	
+	<!-- 게시물 상세 조회 -->
+	<select id="qnaDetail" parameterType="qna" resultType="qna">
+	SELECT q_no, m_id, q_title, q_content, m_id,
+	to_char(q_date, 'YYYY-MM-DD HH24:MI:SS') AS q_date, 
+	to_char(q_update, 'YYYY-MM-DD HH24:MI:SS') AS q_update, readcnt
+	FROM qna a inner join member m on a.m_no= m.m_no 
+	WHERE q_no = #{q_no}		
+	</select>
+	
+	<!-- 해당 번호의 비밀번호 확인  -->
+	<select id="pwdConfirm" parameterType="qna" resultType="int">
+	SELECT NVL((SELECT 1 FROM qna 
+	WHERE q_no=#{q_no} AND q_pwd=#{q_pwd}),0) as state FROM dual
+	</select>
+	
+	<!-- 게시물 수정하기  -->
+	<update id="qnaUpdate" parameterType="qna">
+	UPDATE qna SET q_title=#{q_title}, q_content=#{q_content}, q_update=sysdate
+	<if test="q_pwd != ''">,q_pwd=#{q_pwd}</if> 
+	WHERE q_no=#{q_no}
+	</update>
+	
+	<!-- 게시물 삭제하기  -->
+	<delete id="qnaDelete" parameterType="qna">
+	DELETE FROM qna WHERE q_no=#{q_no}
+	</delete>
+	
+	
+	
+	<!-- 조회수 넣기  -->
+	<update id="updateCnt" parameterType="qna">
+    UPDATE qna SET readcnt = readcnt + 1
+    WHERE q_no = #{q_no}
+	</update>
+	
+</mapper>	

@@ -124,7 +124,6 @@ public String noticeUpdate(NoticeVO nvo, Model model) {
 *******************************************************************/
 @RequestMapping(value="/notice/noticeDelete.do")      
 public String noticeDelete(NoticeVO nvo, HttpServletRequest request)throws IOException{       
-	
 	logger.info("noticeDelete 호출 성공");
 
 	int result = 0;

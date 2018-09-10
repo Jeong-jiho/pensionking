@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pension.admin.employee.dao.EmployeeDao">
+<select id="employeeList" parameterType="employee" resultType="employee">
+	/* Employee - employeeList */
+SELECT e.e_no, e.e_name, e.e_phone, j.j_name, j.j_day, j.j_time, e.e_status 
+FROM employee e inner join job j on e.j_no = j.j_no 
+</select>
+
+<select id="employeeDetail" parameterType="employee" resultType="employee">
+ /* Employee - employeeDetail */
+SELECT e.e_no, e.e_name, e.e_phone, e.e_birth, e.e_gender, e.e_address, j.j_name, j.j_day, j.j_time, e.e_price , to_char(e.e_date,'YYYY-MM-DD') as e_date , to_char(e.e_update,'YYYY-MM-DD') as e_update,to_char(e.e_hiredate,'YYYY-MM-DD') as e_hiredate, to_char(e.e_retiredate, 'YYYY-MM-DD') as e_retiredate
+FROM employee e inner join job j on e.j_no = j.j_no where e.e_no = #{e_no} 
+</select>
+
+<insert id="employeeInsert" parameterType="employee">
+   /* Employee - employeeInsert */
+INSERT into employee (e_no, e_name, e_gender, e_birth, e_address, e_hiredate, e_price, e_phone, e_date, j_no) 
+VALUES(employee_seq.nextval, #{e_name}, #{e_gender}, #{e_birth}, #{e_address}, to_date(#{e_hiredate},'YYYY-MM-DD'), #{e_price}, #{e_phone}, to_date(sysdate,'YYYY-MM-DD'), #{j_no}) 
+</insert>   
+
+<update id="employeeUpdate" parameterType="employee">
+ 	/* Employee - employeeUpdate */
+ UPDATE employee set e_name = #{e_name}, e_gender = #{e_gender}, e_birth = #{e_birth}, e_phone = #{e_phone}, e_address = #{e_address}, j_no = #{j_no}, e_price = #{e_price}, e_update = TO_DATE(SYSDATE,'YYYY-MM-DD'), e_hiredate = TO_DATE(#{e_hiredate},'YYYY-MM-DD') where e_no = #{e_no}
+ </update>
+ 
+<update id="employeeRetire" parameterType="employee">
+	/* Employee - employeeRetire */
+UPDATE employee set e_retiredate = TO_DATE(sysdate,'YYYY-MM-DD'), e_status = 0 where e_no = #{e_no}
+</update>
+</mapper> 

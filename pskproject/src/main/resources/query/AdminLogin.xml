@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pension.admin.login.dao.AdminLoginDao">
+	<select id="owner_idSelect" parameterType="String" resultType="adminLogin">
+		SELECT owner_id, owner_pwd, owner_name FROM owner WHERE owner_id = #{owner_id}
+	</select>
+	
+	<select id="loginSelect" parameterType="adminLogin" resultType="adminLogin"> 
+		/* 로그인 처리 쿼리 */
+		SELECT owner_id, owner_pwd, owner_name FROM owner WHERE owner_id = #{owner_id} 
+		AND owner_pwd = #{owner_pwd}
+	</select>
+</mapper> 

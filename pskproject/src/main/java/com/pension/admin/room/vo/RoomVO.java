@@ -1,16 +1,74 @@
 package com.pension.admin.room.vo;
 
-public class RoomVO {
+import org.springframework.web.multipart.MultipartFile;
+
+import com.pension.admin.price.vo.PriceVO;
+
+public class RoomVO extends PriceVO{
 	private int r_no = 0;
 	private String r_name = "";
-	private String r_size = "";
+	private String r_size = ""; 
 	private int r_standard = 0;
 	private int r_max = 0;
 	private String r_cvc = "";
+	private String cvc[];
 	private String r_date = "";
 	private String r_update = "";
 	private String r_kind = "";
-	 
+
+	private String r_info = "";
+	private String r_main = ""; 
+	
+
+	public String[] getCvc() {
+		return cvc;
+	}
+	public void setCvc(String[] cvc) {
+		this.cvc = cvc;
+	}
+	private MultipartFile file[];  
+	private String filename;
+	
+	private String i_kind = "";
+	private int i_no=0; 
+	
+	public int getI_no() {
+		return i_no;
+	}
+	public void setI_no(int i_no) {
+		this.i_no = i_no;
+	}
+	public String getR_main() {
+		return r_main;
+	}
+	public void setR_main(String r_main) {
+		this.r_main = r_main;
+	}
+	public String getI_kind() {
+		return i_kind;
+	}
+	public void setI_kind(String i_kind) {
+		this.i_kind = i_kind;
+	}
+	public MultipartFile[] getFile() {
+		return file;
+	}
+	public void setFile(MultipartFile[] file) {
+		this.file = file;
+	}
+	public String getFilename() {
+		return filename;
+	}
+	public void setFilename(String filename) {
+		this.filename = filename;
+	}
+	public String getR_info() {
+		return r_info;
+	}
+	public void setR_info(String r_info) {
+		this.r_info = r_info;
+	}
+
 	public int getR_no() {
 		return r_no;
 	}

@@ -18,7 +18,7 @@ public interface ReviewDao {
 
 	public int reviewDelete(int rv_no);
 
-	public int updateCnt(Integer rv_no) throws Exception;
+	public int updateCnt(int rv_no);
 
 	 
 }

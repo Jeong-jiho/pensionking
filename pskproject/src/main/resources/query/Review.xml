@@ -3,10 +3,10 @@
 <mapper namespace="com.pension.client.review.dao.ReviewDao">
 
 	<select id="reviewList" parameterType="review" resultType="review">
-	SELECT a.rv_no, rv_title, rv_name, readcnt, 
+	SELECT a.rv_no, rv_title, m_id, readcnt, 
 	to_char(rv_date, 'YYYY-MM-DD') AS rv_date, 
 	(select count(*) from reply where rv_no=a.rv_no) as rp_cnt 
-	FROM review a 
+	FROM review a inner join member m on a.m_no= m.m_no 
 	<where>
 		<if test="search=='rv_title'">
 			<![CDATA[rv_title LIKE '%'|| #{keyword} ||'%']]>
@@ -14,33 +14,36 @@
 		<if test="search=='rv_content'">
 			<![CDATA[rv_content LIKE '%'|| #{keyword} ||'%']]>
 		</if>	
-		<if test="search=='rv_name'">
-			<![CDATA[rv_name LIKE '%'|| #{keyword} ||'%']]>
-		</if>
+		<if test="search=='m_id'">
+			<![CDATA[m_id LIKE '%'|| #{keyword} ||'%']]>
+		</if> 
 		<if test="search=='rv_date'">
 			<![CDATA[to_char(rv_date, 'YYYY-MM-DD') between #{start_date} and #{end_date} ]]>
 		</if>
+		<if test="m_no!=0">
+			<![CDATA[m.m_no = #{m_no}]]>
+		</if>
 	</where>
-	order by a.rv_no desc	
+	order by rv_no desc	
 	</select>	
 	
 	<!-- 게시물 입력 -->
 	<insert id="reviewInsert" parameterType="review" >
-	INSERT INTO review(rv_no ,rv_name ,rv_title ,rv_content 
+	INSERT INTO review(rv_no ,rv_title ,rv_content ,m_no 
 	<if test="rv_file != null and rv_file !=''">,rv_file</if> ,rv_pwd)
-	VALUES(review_seq.nextval ,#{rv_name} ,#{rv_title} ,#{rv_content} 
+	VALUES(review_seq.nextval ,#{rv_title} ,#{rv_content} ,#{m_no} 
 	<if test="rv_file != null and rv_file !=''">,#{rv_file}</if> ,#{rv_pwd})
 	</insert>
 	
 	<!-- 게시물 상세 조회 -->
 	<select id="reviewDetail" parameterType="review" resultType="review">
-	/*Review - reviewDetial */
-	SELECT rv_no, rv_name, rv_title, rv_content,
+	SELECT rv_no, m_id, rv_title, rv_content,
 	to_char(rv_date, 'YYYY-MM-DD HH24:MI:SS') AS rv_date, 
-	to_char(rv_update, 'YYYY-MM-DD HH24:MI:SS') AS rv_update, 
-	rv_file	FROM review WHERE rv_no = #{rv_no}		
+	to_char(rv_update, 'YYYY-MM-DD HH24:MI:SS') AS rv_update, readcnt,
+	rv_file	FROM review a inner join member m on a.m_no= m.m_no 
+	WHERE rv_no = #{rv_no}		
 	</select>
-	
+		
 	<!-- 해당 번호의 비밀번호 확인  -->
 	<select id="pwdConfirm" parameterType="review" resultType="int">
 	/*Review - pwdConfirm */
@@ -65,7 +68,7 @@
 	
 	<!-- 조회수 넣기  -->
 	<update id="updateCnt" parameterType="review">
-    UPDATE review SET readcnt = NVL(readcnt,0) + 1
+    UPDATE review SET readcnt = readcnt + 1
     WHERE rv_no = #{rv_no}
 	</update>
 	

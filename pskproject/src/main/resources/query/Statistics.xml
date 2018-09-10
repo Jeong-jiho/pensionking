@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pension.admin.statistics.dao.StatisticsDao">
+	<!-- 월 전체 통계 -->
+	<select id="statistics" parameterType="statistics" resultType="statistics">
+		select * from statistics_view
+	</select>
+	
+	<!-- 객실별 판매정보 -->
+	<select id="statisticsRoom" parameterType="statistics" resultType="statistics">
+		select r_name,nvl(res_totalcnt,0) res_totalcnt,nvl(res_total,0) res_total from (select r_name,count(res_no) res_totalcnt,
+		to_char(sum(res_price),'999,999,999,999,999') res_total from reservation inner join room using(r_no) where substr(res_indate,4,2)
+		 = '09' and res_state='예약완료' group by r_name) right outer join room r using(r_name) order by r_name
+	</select>
+	
+	<!-- 오늘 예약,대기,취소 건수 --> 
+	<select id="todayCnt" parameterType="statistics" resultType="statistics">
+		select (select count(res_no) from reservation where res_state='입금대기' and res_date like sysdate) res_wait,(select count(res_no)     
+		from reservation where res_state='예약완료' and res_date like sysdate) res_end, (select count(res_no) from reservation where res_gno=
+		(select res_gno from res_cancel where c_date like sysdate )) res_cancel from dual
+	</select>
+	
+	<!-- 오늘 입실 정보 -->
+	<select id="todayIn" parameterType="statistics" resultType="statistics">
+		select res_no, r_name, res_people, m_name, m_phone, res_bbq from reservation inner join room using(r_no) inner join member using(m_no)                
+		where res_state='예약완료' and res_indate like sysdate order by r_name
+	</select>
+	
+	<!-- 오늘 퇴실 정보 -->
+	<select id="todayOut" parameterType="statistics" resultType="statistics">
+		select res_no, r_name, res_people, m_name, m_phone from reservation inner join room using(r_no) inner join member using(m_no)           
+		where res_state='예약완료' and res_outdate like sysdate order by r_name
+	</select> 
+</mapper>   

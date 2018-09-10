@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,13 +16,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.pension.client.login.vo.LoginVO;
 import com.pension.client.review.service.ReviewService;
 import com.pension.client.review.vo.ReviewVO;
 import com.pension.common.file.FileUploadUtil;
 
 
 @Controller
-@RequestMapping(value="/review")
+@RequestMapping(value="/review") 
 public class ReviewController {
 	Logger logger = Logger.getLogger(ReviewController.class);
 
@@ -35,32 +37,39 @@ public class ReviewController {
 public String reviewList(@ModelAttribute("data") ReviewVO rvo, Model model) {
 logger.info("reviewList 호출성공");
 
+
 List<ReviewVO> reviewList = reviewService.reviewList(rvo);
 model.addAttribute("reviewList", reviewList);
 
-return "review/reviewList";		
+return "client/review/reviewList";		
 }
 /*****************************************************************
 							글쓰기 폼 출력하기
 ******************************************************************/
 @RequestMapping(value="/writeForm.do")
-public String writeForm() {
-logger.info("writeForm 호출 성공");
-
-return "review/writeForm";
+public String writeForm(ReviewVO rvo){
+	logger.info("writeForm 호출 성공");
+			
+	return "client/review/writeForm";
 
 }
 /*****************************************************************
 							글 입력하기
 ******************************************************************/
 @RequestMapping(value="/reviewInsert.do", method=RequestMethod.POST)
-public String reviewInsert(ReviewVO rvo, Model model, HttpServletRequest request) throws
+public String reviewInsert(HttpSession session, ReviewVO rvo, Model model, HttpServletRequest request) throws
 	IllegalStateException, IOException{
 	logger.info("reviewInsert 호출 성공");
 	
 	int result = 0;
 	String url = "";
-		
+	
+	LoginVO login =(LoginVO)session.getAttribute("login");
+	rvo.setM_no(login.getM_no());
+	
+	logger.info("m_id = "+login.getM_id());
+    logger.info("m_no = "+login.getM_no());
+	
 	//확인 후 주석 처리
 	//logger.info("fileName:"+rvo.getFile().getOriginalFilename()
 	//logger.info("b_title:"+rvo.getB_title());
@@ -74,10 +83,10 @@ public String reviewInsert(ReviewVO rvo, Model model, HttpServletRequest request
 	
 	result = reviewService.reviewInsert(rvo);
 	if(result==1) {
-		url= "/review/reviewList.do";
+		url= "reviewList.do";
 	}else {
 		model.addAttribute("code",1);
-		url="/review/writeForm.do";
+		url="writeForm.do";
 	}
 	return "redirect:"+ url;
 }
@@ -100,7 +109,7 @@ public String reviewDetail(ReviewVO rvo, Model model) {
 		}
 	model.addAttribute("detail", detail);
 	
-	return "review/reviewDetail";	
+	return "client/review/reviewDetail";	
 	}
 /*****************************************************************
 							비밀 번호 확인
@@ -135,7 +144,7 @@ public String updateForm(ReviewVO rvo, Model model) {
 	updateData = reviewService.reviewDetail(rvo);
 
 	model.addAttribute("updateData", updateData);
-	return "review/updateForm";
+	return "client/review/updateForm";
 
 }
 /******************************************************************
@@ -163,9 +172,9 @@ public String reviewUpdate(ReviewVO rvo, HttpServletRequest request) throws IOEx
    }
    result = reviewService.reviewUpdate(rvo);
    if(result == 1) {
-      url = "/review/reviewDetail.do?rv_no="+rvo.getRv_no();
+      url = "reviewDetail.do?rv_no="+rvo.getRv_no();
    }else {
-      url = "/review/updateForm.do?rv_no="+rvo.getRv_no();
+      url = "updateForm.do?rv_no="+rvo.getRv_no();
    }
    return "redirect:" + url;
 }
@@ -185,9 +194,9 @@ public String reviewDelete(ReviewVO rvo, HttpServletRequest request)throws IOExc
 
 	result = reviewService.reviewDelete(rvo.getRv_no());
 	if(result == 1) {
-		url = "/review/reviewList.do";
+		url = "reviewList.do";
 	}else {
-		url = "/review/reviewDetail.do?rv_no="+rvo.getRv_no();
+		url = "reviewDetail.do?rv_no="+rvo.getRv_no();
 	}
 	return "redirect:" + url;
 

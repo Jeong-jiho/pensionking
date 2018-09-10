@@ -10,7 +10,7 @@
 		</layout>
 	</appender>
 	 
-	<!-- Application Loggers -->
+	<!-- Application Loggers --> 
 	<logger name="com.pension.client">
 		<level value="info" />
 	</logger>
@@ -31,22 +31,69 @@
 	<logger name="com.pension.client.reply.dao">
 		<level value="trace" />
 	</logger>
+	
+	<logger name="com.pension.client.qna.dao">
+		<level value="trace" />
+	</logger>
 		
 	<logger name="com.pension.admin.room.dao">
 		<level value="trace" />
 	</logger>
-	
-<<<<<<< HEAD
+
 	<logger name="com.pension.client.reservation.dao">
 		<level value="trace"/>
 	</logger>
+
+	<logger name="com.pension.admin.pay.dao">
+		<level value="trace" /> 
+	</logger>
 	
-=======
+	<logger name="com.pension.admin.price.dao">
+		<level value="trace" />
+	</logger>
+	
 	<logger name="com.pension.admin.notice.dao">
 		<level value="trace" />
 	</logger>
-	 
->>>>>>> branch 'master' of https://github.com/Jeong-jiho/pensionking.git
+	
+	<logger name="com.pension.admin.statistics.dao">
+		<level value="trace" />
+	</logger>
+	
+	<logger name="com.pension.admin.login.dao">
+		<level value="trace" />
+	</logger>
+	
+	<logger name="com.pension.admin.stock.dao">
+      <level value="trace" />
+   </logger>
+   
+   <logger name="com.pension.admin.employee.dao">
+      <level value="trace" />
+   </logger>
+   
+   <logger name="com.pension.admin.order.dao">
+      <level value="trace" />
+   </logger>
+   
+   <logger name="com.pension.admin.orderProduct.dao">
+      <level value="trace" />
+   </logger>
+   
+   <logger name="com.pension.admin.member.dao">
+      <level value="trace" />
+   </logger>
+	
+	<logger name="com.pension.client.member.dao">
+		<level value="trace" />
+	</logger>
+	
+	<logger name="com.pension.client.login.dao">
+		<level value="trace" />
+	</logger>	
+	
+	
+	
 	<!-- 3rdparty Loggers -->
 	<logger name="org.springframework.core">
 		<level value="info" />

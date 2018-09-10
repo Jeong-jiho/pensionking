@@ -30,9 +30,9 @@ public class ReplyController {
 	 *참고 : @PathVariable는 URI의 경로에서 원하는 데이터로							
 
 ***********************************************************************/
-	@RequestMapping(value="/all/{rv_no}.do", method= RequestMethod.GET)
-	public ResponseEntity<List<ReplyVO>> list(@PathVariable("rv_no")Integer rv_no){
-		ResponseEntity<List<ReplyVO>>entity = null;
+@RequestMapping(value="/all/{rv_no}.do", method= RequestMethod.GET)
+public ResponseEntity<List<ReplyVO>> list(@PathVariable("rv_no")Integer rv_no){
+	ResponseEntity<List<ReplyVO>>entity = null;
 		try {
 			entity = new ResponseEntity<>(replyService.replyList(rv_no),HttpStatus.OK);
 		}catch(Exception e) {
